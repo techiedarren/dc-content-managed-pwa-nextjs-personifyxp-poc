@@ -8,11 +8,11 @@ import UserActions from '../components/UserActions';
 import Navigation from '../components/Navigation';
 import SearchBox from '../components/SearchBox';
 import Footer from '../components/Footer';
-import EditorialBlock from '../components/EditorialBlock';
-import HeroBannerBlock from '../components/HeroBannerBlock';
-import GalleryBlock from '../components/GalleryBlock';
+
 import Sidebar from '../components/Sidebar';
 import { fetchContent } from '../utils/fetchContent';
+import ContentBlock from '../components/ContentBlock';
+import { UserProfileState } from '../components/UserProfile';
 
 interface Props {
     navigation: {
@@ -30,10 +30,6 @@ const Index: NextPage<Props> = (props: Props) => {
       navigation,
       slot
   } = props;
-
-
-
-
 
   const [sidebarOpen, setSidebarOpen] = React.useState(false);
 
@@ -79,21 +75,7 @@ const Index: NextPage<Props> = (props: Props) => {
 
         {
             slotContent.components.map(component => {
-                let ComponentType = null;
-
-                switch (component.component) {
-                    case 'HeroBannerBlock':
-                        ComponentType = HeroBannerBlock;
-                        break;
-                    case 'EditorialBlock':
-                        ComponentType = EditorialBlock;
-                        break;
-                    case 'GalleryBlock':
-                        ComponentType = GalleryBlock;
-                        break;
-                }
-                
-                return <ComponentType {...component} />;
+                return <ContentBlock data={component} />;
             })
         }
 
@@ -111,7 +93,7 @@ Index.getInitialProps = async (context) => {
 
   return {
     navigation: await navigation,
-    slot: await slot
+    slot: await slot,
   };
 };
 

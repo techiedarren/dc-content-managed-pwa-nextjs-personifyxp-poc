@@ -1,0 +1,25 @@
+{
+    "contentTypeUri": "https://anyafinn.dev/component-targeted-content.json",
+    "settings":
+    {
+        "label": "Targeted Content",
+        "visualizations": [
+        {
+            "label": "PWA (Localhost)",
+            "templatedUri":"http://localhost:3000/visualization?id={{content.sys.id}}&contentApi={{vse.domain}}",
+            "default": true
+        },
+        {
+            "label": "JSON",
+            "templatedUri":"https://{{vse.domain}}/content/id/{{content.sys.id}}?depth=all&format=inlined",
+            "default": false
+        }],
+        "icons": [
+        {
+            "size": 256,
+            "url": "https://bigcontent.io/cms/icons/experience-management/exp-cohort.png"
+        }],
+        "cards": []
+    },
+    "repositories": ["content"]
+}

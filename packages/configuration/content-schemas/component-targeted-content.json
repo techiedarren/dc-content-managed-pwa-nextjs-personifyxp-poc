@@ -1,0 +1,78 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"$id": "https://anyafinn.dev/component-targeted-content.json",
+
+	"title": "Targeted Content",
+	"description": "",
+
+	"allOf": [
+		{
+			"$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content"
+		}
+	],
+	
+	"type": "object",
+	"properties": {
+        "component": {
+			"type": "string",
+			"const": "TargetedContent"
+        },
+        
+        "groups": {
+            "type": "array",
+            "title": "Target Groups",
+            "items": {
+                "type": "object",
+                "title": "Target Group",
+                "properties": {
+                    "criteria": { "$ref": "#/definitions/personifyXPCriteria" },
+                    "components": {
+                        "title": "Components",
+                        "type": "array",
+                        "items": {
+                            "title": "Component",
+                            "allOf": [
+                                { "$ref": "http://bigcontent.io/cms/schema/v1/core#/definitions/content-link" },
+                                {
+                                    "properties": {
+                                        "contentType": {
+                                            "enum": [
+                                                "https://anyafinn.dev/component-hero-banner-block.json",
+                                                "https://anyafinn.dev/component-editorial-block.json",
+                                                "https://anyafinn.dev/component-gallery-block.json"
+                                            ]
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        }
+    },
+    
+    "definitions": {
+        "personifyXPCriteria": {
+            "type": "object",
+            "properties": {
+                "behaviors": {
+                    "type": "array",
+                    "title": "Behaviors",
+                    "items": {
+                        "type": "string",
+                        "title": "Behavior"
+                    }
+                },
+                "tags": {
+                    "type": "array",
+                    "title": "Tags",
+                    "items": {
+                        "type": "string",
+                        "title": "Tag"
+                    }
+                }
+            }
+        }
+    }
+}

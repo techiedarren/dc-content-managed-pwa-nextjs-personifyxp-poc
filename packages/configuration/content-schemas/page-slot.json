@@ -25,7 +25,8 @@
 								"enum": [
 									"https://anyafinn.dev/component-hero-banner-block.json",
 									"https://anyafinn.dev/component-editorial-block.json",
-									"https://anyafinn.dev/component-gallery-block.json"
+									"https://anyafinn.dev/component-gallery-block.json",
+									"https://anyafinn.dev/component-targeted-content.json"
 								]
 							}
 						}

@@ -1,0 +1,5 @@
+{
+    "body": "../content-schemas/component-targeted-content.json",
+    "schemaId": "https://anyafinn.dev/component-targeted-content.json",
+    "validationLevel": "CONTENT_TYPE"
+}
