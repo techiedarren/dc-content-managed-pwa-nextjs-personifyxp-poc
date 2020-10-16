@@ -3,6 +3,7 @@ import { withStyles, WithStyles, Theme, Typography } from '@material-ui/core';
 import Section, { SectionVariant } from './Section';
 import CallToAction from './CallToAction';
 import { getImageURL, ImageScaleMode } from '../utils/getImageURL';
+import { useContentAnalytics } from '../utils/analytics';
 
 const styles = (theme: Theme) => ({
     root: {
@@ -61,11 +62,22 @@ const GalleryBlock: React.SFC<Props> = (props) => {
         ...other
     } = props;
 
+    const { trackEvent } = useContentAnalytics();
+
+
     return (
         <Section variant={SectionVariant.CONTAINED} {...other}>
             <ul className={classes.list}>
                 {
                     items.map(item => {
+                        const handleImageClick = () => {
+                            trackEvent({
+                                category: 'Image', 
+                                action: 'Click', 
+                                label: item.callToActionHref
+                            });
+                        };
+
                         const imageUrl = getImageURL(item.image, {
                             width: 600,
                             height: 450,
@@ -73,7 +85,7 @@ const GalleryBlock: React.SFC<Props> = (props) => {
                         });
 
                         return <li className={classes.listItem}>
-                            <img className={classes.listItemImage} src={imageUrl} />
+                            <img className={classes.listItemImage} src={imageUrl} onClick={handleImageClick} />
                             <div className={classes.listItemText}>
                                 <Typography variant="h5">
                                     {item.title}

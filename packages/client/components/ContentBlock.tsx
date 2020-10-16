@@ -5,6 +5,9 @@ import EditorialBlock from './EditorialBlock';
 import HeroBannerBlock from './HeroBannerBlock';
 import GalleryBlock from './GalleryBlock';
 import TargetedContent from './TargetedContent';
+import { WithContentItem } from './cms/ContentItemContext';
+import { WithEdition } from './cms/EditionContext';
+import PageSlot from './PageSlot';
 
 const styles = theme => ({
 });
@@ -44,13 +47,26 @@ const ContentBlock: React.SFC<Props> = (props) => {
         case 'TargetedContent':
             ComponentType = TargetedContent;
             break;
+        case 'PageSlot':
+            ComponentType = PageSlot;
+            break;
     }
     
     if (!ComponentType) {
         return;
     }
 
-    return <ComponentType {...data} />;
+    const result = <WithContentItem {...data._meta}>
+        <ComponentType {...data} />
+    </WithContentItem>;
+
+    if (data._meta?.edition) {
+        return <WithEdition {...data._meta.edition}>
+            {result}
+        </WithEdition>
+    } else {
+        return result;
+    }
 };
 
 export default withStyles(styles)(ContentBlock);

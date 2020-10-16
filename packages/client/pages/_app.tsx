@@ -9,6 +9,7 @@ import GlobalStyle from '../components/GlobalStyle';
 import { WithUserProfile, UserProfileState } from '../components/UserProfile';
 import { fetchUserProfile } from '../utils/fetchUserProfile';
 import App from 'next/app';
+import { trackPageView, configureAnalytics } from '../utils/analytics';
 
 export default class CustomApp extends NextApp<{userProfile: UserProfileState}> {
     componentDidMount() {
@@ -17,6 +18,8 @@ export default class CustomApp extends NextApp<{userProfile: UserProfileState}> 
         if (jssStyles) {
             jssStyles.parentElement.removeChild(jssStyles);
         }
+
+        configureAnalytics();
     }
 
     render() {
